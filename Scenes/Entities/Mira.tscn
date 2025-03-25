@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://d33hhjynf7hbg"]
+
+[ext_resource type="Script" path="res://Scenes/Entities/mira.gd" id="1_7phvv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7vi8"]
+radius = 1.41421
+
+[sub_resource type="BoxMesh" id="BoxMesh_8lkfj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_smoli"]
+radius = 20.0
+
+[node name="Mira" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_7phvv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e7vi8")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+navigation_layers = 3
+path_postprocessing = 1
+simplify_path = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
+modulate = Color(0.58932, 1, 0.661653, 1)
+position = Vector2(1.90735e-06, 0)
+scale = Vector2(18.5, 13.5)
+mesh = SubResource("BoxMesh_8lkfj")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_smoli")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

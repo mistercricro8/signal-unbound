@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi7wcmpeytwy0"]
+
+[ext_resource type="Script" path="res://Scenes/Models/door.gd" id="1_55wa1"]
+[ext_resource type="FontFile" uid="uid://bvc7otdv2tjnd" path="res://Resources/JetBrainsMono-VariableFont_wght.ttf" id="2_rixl1"]
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_55wa1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 21.0
+offset_bottom = 21.0
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_rixl1")
+theme_override_font_sizes/font_size = 16
+text = "d0"
+horizontal_alignment = 1
+vertical_alignment = 1
